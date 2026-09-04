@@ -1,0 +1,365 @@
+{
+  "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
+  "id": "com.gpm.aqarafp1",
+  "version": "1.0.0",
+  "compatibility": ">=12.4.0",
+  "sdk": 3,
+  "runtime": "nodejs",
+  "platforms": [
+    "local"
+  ],
+  "name": {
+    "en": "Aqara FP1"
+  },
+  "description": {
+    "en": "Presence detection and temperature monitoring with the Aqara FP1 mmWave sensor."
+  },
+  "category": [
+    "security"
+  ],
+  "brandColor": "#096CBF",
+  "permissions": [],
+  "images": {
+    "small": "/assets/images/small.png",
+    "large": "/assets/images/large.png",
+    "xlarge": "/assets/images/xlarge.png"
+  },
+  "author": {
+    "name": "Gabriel Pedrosa Machado",
+    "email": "g.machado@me.com"
+  },
+  "flow": {
+    "triggers": [
+      {
+        "id": "aqara_fp1_presence_event",
+        "title": {
+          "en": "Presence event",
+          "es": "Evento de presencia",
+          "it": "Evento di presenza",
+          "de": "Präsenzereignis"
+        },
+        "titleFormatted": {
+          "en": "[[device]] presence event",
+          "es": "Evento de presencia de [[device]]",
+          "it": "Evento di presenza di [[device]]",
+          "de": "Präsenzereignis von [[device]]"
+        },
+        "hint": {
+          "en": "Fires when the FP1 reports a presence event such as enter, leave or approach.",
+          "es": "Se activa cuando el FP1 informa un evento de presencia como entrar, salir o acercarse.",
+          "it": "Si attiva quando l'FP1 segnala un evento di presenza come entrare, uscire o avvicinarsi.",
+          "de": "Wird ausgelöst, wenn der FP1 ein Präsenzereignis wie Betreten, Verlassen oder Annäherung meldet."
+        },
+        "tokens": [
+          {
+            "name": "event",
+            "type": "string",
+            "title": {
+              "en": "Presence event",
+              "es": "Evento de presencia",
+              "it": "Evento di presenza",
+              "de": "Präsenzereignis"
+            }
+          },
+          {
+            "name": "event_id",
+            "type": "string",
+            "title": {
+              "en": "Event ID",
+              "es": "ID del evento",
+              "it": "ID evento",
+              "de": "Ereignis-ID"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=aqara_fp1"
+          }
+        ]
+      }
+    ],
+    "actions": [
+      {
+        "id": "aqara_fp1_reset_presence",
+        "title": {
+          "en": "Reset presence",
+          "es": "Resetear presencia",
+          "it": "Reset presenza",
+          "de": "Präsenz zurücksetzen"
+        },
+        "hint": {
+          "en": "Send the FP1 reset presence command.",
+          "es": "Envía el comando de restablecimiento de presencia del FP1.",
+          "it": "Invia il comando di reset della presenza per l'FP1.",
+          "de": "Sendet den Befehl zum Zurücksetzen der Präsenz des FP1."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=aqara_fp1"
+          }
+        ]
+      }
+    ]
+  },
+  "drivers": [
+    {
+      "id": "aqara_fp1",
+      "name": {
+        "en": "Aqara FP1 Presence Sensor",
+        "de": "Aqara FP1 Präsenzsensor",
+        "es": "Sensor de presencia Aqara FP1",
+        "it": "Sensore di presenza Aqara FP1"
+      },
+      "class": "sensor",
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "zigbee"
+      ],
+      "capabilities": [
+        "alarm_occupancy",
+        "measure_temperature"
+      ],
+      "images": {
+        "xlarge": "/drivers/aqara_fp1/assets/images/xlarge.png",
+        "large": "/drivers/aqara_fp1/assets/images/large.png",
+        "small": "/drivers/aqara_fp1/assets/images/small.png"
+      },
+      "energy": {
+        "approximation": {
+          "usageOn": 0.5,
+          "usageOff": 0
+        }
+      },
+      "zigbee": {
+        "manufacturerName": [
+          "aqara"
+        ],
+        "productId": [
+          "lumi.motion.ac01"
+        ],
+        "endpoints": {
+          "1": {
+            "clusters": [
+              0,
+              3,
+              64704
+            ],
+            "bindings": [
+              64704
+            ]
+          }
+        },
+        "learnmode": {
+          "image": "/drivers/aqara_fp1/assets/icon.svg",
+          "instruction": {
+            "en": "Press and hold the reset button on the FP1 for 5 seconds until the LED flashes blue.",
+            "de": "Halte die Reset-Taste am FP1 5 Sekunden lang gedrückt, bis die LED blau blinkt.",
+            "es": "Mantén pulsado el botón de reinicio del FP1 durante 5 segundos hasta que el LED parpadee en azul.",
+            "it": "Tieni premuto il pulsante di reset dell'FP1 per 5 secondi finché il LED non lampeggia in blu."
+          }
+        }
+      },
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Detection",
+            "de": "Erkennung",
+            "es": "Detección",
+            "it": "Rilevamento"
+          },
+          "children": [
+            {
+              "id": "motion_sensitivity",
+              "type": "dropdown",
+              "label": {
+                "en": "Motion sensitivity",
+                "de": "Bewegungsempfindlichkeit",
+                "es": "Sensibilidad de movimiento",
+                "it": "Sensibilità al movimento"
+              },
+              "hint": {
+                "en": "Detection sensitivity (low/medium/high).",
+                "de": "Erkennungsempfindlichkeit (niedrig/mittel/hoch).",
+                "es": "Sensibilidad de detección (baja/media/alta).",
+                "it": "Sensibilità di rilevamento (bassa/media/alta)."
+              },
+              "value": "medium",
+              "values": [
+                {
+                  "id": "low",
+                  "label": {
+                    "en": "Low",
+                    "de": "Niedrig",
+                    "es": "Bajo",
+                    "it": "Basso"
+                  }
+                },
+                {
+                  "id": "medium",
+                  "label": {
+                    "en": "Medium",
+                    "de": "Mittel",
+                    "es": "Medio",
+                    "it": "Medio"
+                  }
+                },
+                {
+                  "id": "high",
+                  "label": {
+                    "en": "High",
+                    "de": "Hoch",
+                    "es": "Alto",
+                    "it": "Alto"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "approach_distance",
+              "type": "dropdown",
+              "label": {
+                "en": "Approach distance",
+                "de": "Annäherungsdistanz",
+                "es": "Distancia de aproximación",
+                "it": "Distanza di avvicinamento"
+              },
+              "hint": {
+                "en": "Distance at which presence is triggered.",
+                "de": "Entfernung, bei der Anwesenheit ausgelöst wird.",
+                "es": "Distancia a la que se activa la presencia.",
+                "it": "Distanza alla quale viene attivata la presenza."
+              },
+              "value": "medium",
+              "values": [
+                {
+                  "id": "far",
+                  "label": {
+                    "en": "Far",
+                    "de": "Weit",
+                    "es": "Lejano",
+                    "it": "Lontano"
+                  }
+                },
+                {
+                  "id": "medium",
+                  "label": {
+                    "en": "Medium",
+                    "de": "Mittel",
+                    "es": "Medio",
+                    "it": "Medio"
+                  }
+                },
+                {
+                  "id": "near",
+                  "label": {
+                    "en": "Near",
+                    "de": "Nah",
+                    "es": "Cercano",
+                    "it": "Vicino"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "show_power_outage_count",
+              "type": "checkbox",
+              "label": {
+                "en": "Show power outage count",
+                "de": "Stromausfall-Zähler anzeigen",
+                "es": "Mostrar contador de cortes",
+                "it": "Mostra contatore interruzioni"
+              },
+              "hint": {
+                "en": "Hide this sensor tile if you do not want to see the power outage count.",
+                "de": "Blendet diese Kachel aus, wenn der Zähler nicht angezeigt werden soll.",
+                "es": "Oculta esta tarjeta si no quieres ver el contador.",
+                "it": "Nasconde questa tessera se non vuoi vedere il contatore."
+              },
+              "value": false
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "label": {
+            "en": "Monitoring",
+            "de": "Überwachung",
+            "es": "Supervisión",
+            "it": "Monitoraggio"
+          },
+          "children": [
+            {
+              "id": "monitoring_mode",
+              "type": "dropdown",
+              "label": {
+                "en": "Monitoring mode",
+                "de": "Überwachungsmodus",
+                "es": "Modo de supervisión",
+                "it": "Modalità di monitoraggio"
+              },
+              "hint": {
+                "en": "Undirected = full area. Left/Right = directional detection.",
+                "de": "Ohne Richtung = gesamter Bereich. Links/Rechts = Richtungsdetektion.",
+                "es": "Sin dirección = zona completa. Izquierda/Derecha = detección direccional.",
+                "it": "Non direzionale = area completa. Sinistra/Destra = rilevamento direzionale."
+              },
+              "value": "undirected",
+              "values": [
+                {
+                  "id": "undirected",
+                  "label": {
+                    "en": "Undirected",
+                    "de": "Richtungsfrei",
+                    "es": "Sin dirección",
+                    "it": "Non direzionale"
+                  }
+                },
+                {
+                  "id": "left_right",
+                  "label": {
+                    "en": "Left / Right",
+                    "de": "Links / Rechts",
+                    "es": "Izquierda / Derecha",
+                    "it": "Sinistra / Destra"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "capabilities": {
+    "power_outage_count": {
+      "type": "number",
+      "title": {
+        "en": "Power Outage Count",
+        "de": "Stromausfall-Zähler",
+        "es": "Contador de cortes de energía",
+        "it": "Contatore interruzioni alimentazione"
+      },
+      "units": {
+        "en": "times",
+        "de": "mal",
+        "es": "veces",
+        "it": "volte"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/power-outage-count.svg",
+      "insights": true,
+      "decimals": 0,
+      "min": 0
+    }
+  }
+}

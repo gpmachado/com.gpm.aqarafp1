@@ -1,0 +1,30 @@
+{
+  "id": "com.gpm.aqarafp1",
+  "version": "1.0.0",
+  "compatibility": ">=12.4.0",
+  "sdk": 3,
+  "runtime": "nodejs",
+  "platforms": [
+    "local"
+  ],
+  "name": {
+    "en": "Aqara FP1"
+  },
+  "description": {
+    "en": "Presence detection and temperature monitoring with the Aqara FP1 mmWave sensor."
+  },
+  "category": [
+    "security"
+  ],
+  "brandColor": "#096CBF",
+  "permissions": [],
+  "images": {
+    "small": "/assets/images/small.png",
+    "large": "/assets/images/large.png",
+    "xlarge": "/assets/images/xlarge.png"
+  },
+  "author": {
+    "name": "Gabriel Pedrosa Machado",
+    "email": "g.machado@me.com"
+  }
+}
