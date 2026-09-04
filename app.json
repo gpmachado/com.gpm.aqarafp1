@@ -28,6 +28,7 @@
     "name": "Gabriel Pedrosa Machado",
     "email": "g.machado@me.com"
   },
+  "source": "https://github.com/gpmachado/com.gpm.aqarafp1",
   "flow": {
     "triggers": [
       {
